@@ -35,8 +35,8 @@ O(N) with cumulative sum:
 			dp[1][4] -= dp[0][0]
 
 			Sum					0	1	2	3	4
-			Mark boundary		   +1	       -1
-			Cul Sum				0   1   1   1   0
+			Mark boundary		                       +1	               -1
+			Cul Sum					0   	1   	1   	1  	0
 
 		i = 2
 			dp[2][2] += dp[1][1]
@@ -49,11 +49,11 @@ O(N) with cumulative sum:
 			dp[2][7] -= dp[1][3]
 
 			Sum     			0	1	2	3	4	5	6	7
-				   	   	   			   +1          -1
-				   	       	   			   +1          -1
-											   +1		   -1
+				   	   	   		       +1          	       -1
+				   	       	   			       +1                      -1
+										       +1		       -1
 
-			Cul Sum				0   0   1   2   3   2   1   0
+			Cul Sum				0   	0   	1   	2   	3  	2   	1	0
 
 
 */
