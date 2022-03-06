@@ -29,8 +29,6 @@ void task() {
 					--itr;
 					--k;
 				}
-
-				//cout << (k > 0 ? -1 : *itr) << endl;
 			} else {
 				itr = nums.lower_bound(x);
 				if (itr != nums.end()) {
@@ -40,7 +38,6 @@ void task() {
 					}
 					--k;
 				}
-				//cout << (itr == nums.end() ? -1 : *itr) << endl;
 			}
 
 			if (k == 0) {
