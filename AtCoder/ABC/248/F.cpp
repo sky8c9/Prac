@@ -3,46 +3,37 @@
 
 using namespace std;
 using ll = long long;
-const int MOD = 998244353;
 
 void task() {
-	int n;
-	cin >> n;
+	int n, p;
+	cin >> n >> p;
 
-	vector<int> f(n + 1);
-	f[1] = 1;f[2] = 3;
-	for(int i = 3; i <= n; i++) {
-		f[i] = f[i - 1] + f[i - 2];
-		f[i] %= MOD;
-	}
+	vector<vector<ll>> dp(n + 2, vector<ll>(2));
+	dp[0][0] = dp[1][1] = 1;
+	for(int i = 1; i < n; i++) {
+		vector<vector<ll>> tmp(n + 2, vector<ll>(2));
 
-	ll ans = 1;
-	vector<int> next(n + 1);
-	vector<int> seen(n + 1);
-	vector<int> p(n + 1);
-	vector<int> q(n + 1);
-	for(int i = 1; i <= n; i++) cin >> p[i];
-	for(int i = 1; i <= n; i++) {
-		cin >> q[i];
-		next[p[i]] = q[i];
-	}
+		for(int j = 0; j < n; j++) {
+			tmp[j][0] += dp[j][0] + dp[j][1];
+			tmp[j][0] %= p;
 
-	for(int i = 1; i <= n; i++) {
-		if (seen[p[i]]) continue;
+			tmp[j + 1][0] += 3 * dp[j][0];
+			tmp[j + 1][0] %= p;
+			tmp[j + 1][1] += dp[j][1]; 
+			tmp[j + 1][1] %= p;
 
-		int cur = p[i];
-		int cnt = 0;
-		while(!seen[cur]) {
-			seen[cur] = true;
-			cnt++;
-			cur = next[cur];
+			tmp[j + 2][1] += 2 * dp[j][0];
+			tmp[j + 2][1] %= p;
 		}
 
-		ans *= f[cnt];
-		ans %= MOD;
+		dp = tmp;
 	}
 
-	cout << ans << endl;
+	for(int i = 1; i < n; i++) {
+		cout << dp[i][0] << " ";
+	}
+
+	cout << endl;
 }
 
 int main() {
